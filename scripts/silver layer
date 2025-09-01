@@ -1,6 +1,6 @@
 --checking data Qulaity in crm_cust_info table in bronze layer analyzing bronze layer using below sql quries 
-
-Select * From bronze.crm_cust_info;
+🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟bronze.crm_cust_info🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
+Select * From bronze.crm_cust_info;    
 
 
 --CHECK FOR UNWANTED SPACES 
@@ -22,10 +22,10 @@ From bronze.crm_cust_info;
 Select Distinct cst_material_status
 From bronze.crm_cust_info;
 
-
+===========================================================================================================
 --after understanding the quality of the data need to improve the quality for that return below sql query 
 
-
+🎄 
 INSERT INTO silver.crm_cust_info(
 	cust_id,
 	cst_key,
@@ -58,3 +58,6 @@ From (
 	FROM bronze.crm_cust_info
 	where cust_id IS NOT NULL 
 	)t WHERE flag_last =1 
+🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
+
+
