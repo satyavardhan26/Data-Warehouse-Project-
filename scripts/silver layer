@@ -1,87 +1,60 @@
-IF OBJECT_ID('silver.crm_cust_info','U') is not null
-	Drop  table silver.crm_cust_info;
+--checking data Qulaity in crm_cust_info table in bronze layer analyzing bronze layer using below sql quries 
 
--- Creating silver.crm_cust_info
-Create Table silver.crm_cust_info
-(
-	cust_id					INT,
-	cst_key					NVARCHAR(50),
-	cst_firstname			NVARCHAR(50),
-	cst_lastname			NVARCHAR(50),
-	cst_material_status		NVARCHAR(50),
-	cst_gndr				NVARCHAR(50),
-	cst_create_date			DATE,
-	dwh_create_date DATETIME2 DEFAULT GETDATE()
-);
-
-IF OBJECT_ID('silver.crm_prd_info','U') is not null
-	Drop  table silver.crm_prd_info;
+Select * From bronze.crm_cust_info;
 
 
--- Creating silver.crm_prd_info
-Create Table silver.crm_prd_info
-(
-	prd_id			INT,
-	prd_key			NVARCHAR(50),
-	prd_nm			NVARCHAR(50),
-	prd_cost		INT,
-	prd_line		NVARCHAR(50),
-	prd_start_dt	DATETIME,
-	prd_end_dt		DATETIME,
-	dwh_create_date DATETIME2 DEFAULT GETDATE()
-);
+--CHECK FOR UNWANTED SPACES 
 
-IF OBJECT_ID('silver.crm_sales_details','U') is not null
-	Drop  table silver.crm_sales_details;
+SELECT  cst_firstname 
+FROM  bronze.crm_cust_info
+WHERE  cst_firstname != TRIM(cst_firstname);
 
---Creating silver.crm_sales_details
-Create Table silver.crm_sales_details
-(
-	sls_ord_num		NVARCHAR(50),
-	sls_ord_key		NVARCHAR(50),
-	sls_cust_id		INT,
-	sls_order_id	INT,
-	sls_ship_id		INT,
-	sls_due_id		INT,
-	sls_sales		INT,
-	sls_quantity	INT,
-	sls_price		INT,
-	dwh_create_date DATETIME2 DEFAULT GETDATE()
-);
 
-IF OBJECT_ID('silver.erp_loc_a101','U') is not null
-	Drop  table silver.erp_loc_a101;
---Creating silver.erp_loc_a101
-Create Table silver.erp_loc_a101
-(
-	cid		NVARCHAR(50),
-	cntry	NVARCHAR(50),
-	dwh_create_date DATETIME2 DEFAULT GETDATE()
+SELECT  cst_lastname 
+FROM  bronze.crm_cust_info
+WHERE  cst_lastname != TRIM(cst_lastname);
+
+--Data Standardization & consistensy 
+
+Select Distinct cst_gndr
+From bronze.crm_cust_info;
+
+Select Distinct cst_material_status
+From bronze.crm_cust_info;
+
+
+--after understanding the quality of the data need to improve the quality for that return below sql query 
+
+
+INSERT INTO silver.crm_cust_info(
+	cust_id,
+	cst_key,
+	cst_firstname,
+	cst_lastname,
+	cst_material_status,
+	cst_gndr,
+	cst_create_date
+
 )
+Select 
+cust_id,
+cst_key,
+TRIM(cst_firstname) AS cst_firstname,
+TRIM(cst_lastname) AS cst_lastname,
+CASE 
+	WHEN UPPER(TRIM(cst_material_status)) = 'M' then 'Married'
+	WHEN UPPER(TRIM(cst_material_status)) = 'S' then 'Single'
+	ELSE 'N/A'
+END cst_material_status,
+CASE 
+	WHEN UPPER(TRIM(cst_gndr)) = 'F' then 'Female'
+	WHEN UPPER(TRIM(cst_gndr)) = 'M' then 'male'
+	ELSE 'N/A'
+END cst_gndr,
 
-IF OBJECT_ID('silver.erp_cust_az12','U') is not null
-	Drop  table silver.erp_cust_az12;
-
---Creating silver.erp_cust_az12
-Create Table silver.erp_cust_az12
-(
-	cid		NVARCHAR(50),
-	bdate	DATE,
-	gen		NVARCHAR(50),
-	dwh_create_date DATETIME2 DEFAULT GETDATE()
-)
-
-
-IF OBJECT_ID('silver.erp_px_cat_g1v2','U') is not null
-	Drop  table silver.erp_px_cat_g1v2;
-
---Creating silver.erp_px_cat_g1v2
-Create Table silver.erp_px_cat_g1v2
-(
-	id				NVARCHAR(50),
-	cat				NVARCHAR(50),
-	subcat			NVARCHAR(50),
-	maintenance		NVARCHAR(50),
-	dwh_create_date DATETIME2 DEFAULT GETDATE()
-
-);
+cst_create_date
+From (
+	Select *, ROW_NUMBER() OVER (PARTITION BY cust_id ORDER BY cst_create_date DESC ) as flag_last
+	FROM bronze.crm_cust_info
+	where cust_id IS NOT NULL 
+	)t WHERE flag_last =1 
