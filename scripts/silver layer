@@ -23,7 +23,7 @@ Select Distinct cst_material_status
 From bronze.crm_cust_info;
 
 ===========================================================================================================
---after understanding the quality of the data need to improve the quality for that return below sql query 
+--after understanding the quality of the data need to improve the quality for that Written below sql query 
 
 🎄 
 INSERT INTO silver.crm_cust_info(
@@ -59,5 +59,102 @@ From (
 	where cust_id IS NOT NULL 
 	)t WHERE flag_last =1 
 🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
+
+
+
+
+🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟bronze.crm_prd_info🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
+
+Select * From bronze.crm_prd_info ;
+
+--Check For Nulls or Duplicates in Primary Key
+-- Expectation : No result 
+
+SELECT 
+prd_id,
+COUNT(*)
+FROM bronze.crm_prd_info 
+GROUP BY prd_id
+HAVING COUNT(*)>1 OR prd_id IS NULL 
+
+--check for unwanted spaces 
+--Expectation : No Results 
+
+Select prd_nm 
+From bronze.crm_prd_info 
+Where prd_nm != Trim(prd_nm);
+
+
+--check for Nulls or Negative Numbers 
+--expectation : No Results 
+
+Select * From bronze.crm_prd_info
+
+WHERE  prd_cost < 0 OR  prd_cost IS NULL;
+
+
+--Data Standardization & consistency 
+
+Select Distinct prd_line
+From bronze.crm_prd_info;
+
+
+--Check for Invalid Date Orders
+
+Select * From bronze.crm_prd_info
+Where prd_end_dt < prd_start_dt;
+
+
+===========================================================================================================
+--after understanding the quality of the data need to improve the quality for that Written below sql query 
+
+
+IF OBJECT_ID('silver.crm_prd_info','U') IS NOT NULL 
+	DROP TABLE silver.crm_prd_info;
+
+CREATE TABLE silver.crm_prd_info(
+		prd_id			INT,
+		cat_id			NVARCHAR(50),
+		prd_key			NVARCHAR(50),
+		prd_nm			NVARCHAR(50),
+		prd_cost		INT,
+		prd_line		NVARCHAR(50),
+		prd_start_dt	DATE,
+		prd_end_dt		DATE,
+		dwh_create_date DATETIME2 DEFAULT GETDATE()
+
+);
+
+INSERT INTO silver.crm_prd_info(
+		prd_id,			
+		cat_id,			
+		prd_key,			
+		prd_nm	,		
+		prd_cost,		
+		prd_line,		
+		prd_start_dt,	
+		prd_end_dt
+		)
+SELECT 
+	prd_id,
+	REPLACE(SUBSTRING(prd_key,1,5),'-','_' )as cat_id,
+	SUBSTRING(prd_key,7,LEN(prd_key)) as prd_key,
+	prd_nm,
+	ISNULL(prd_cost,0) AS prd_cost,
+		CASE UPPER(TRIM(prd_line))
+			WHEN 'M' THEN 'Mountains'
+			WHEN 'R' THEN 'Roads'
+			WHEN 'S' THEN 'Other Sales'
+			WHEN 'T' THEN 'Touring'
+			ELSE 'N/A'
+		END AS prd_line,
+
+CAST(prd_start_dt AS DATE) AS prd_start_dt,
+
+CAST(LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt)-1 AS DATE )  AS prd_end_dt
+	
+From bronze.crm_prd_info;
+
+
 
 
