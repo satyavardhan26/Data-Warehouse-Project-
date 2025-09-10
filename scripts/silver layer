@@ -278,6 +278,98 @@ Select * From silver.crm_sales_details;
 
 
 
+🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
 
 
 
+🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟bronze.erp_cust_az12🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
+
+
+--Indetify Out-of-Range Dates
+
+SELECT DISTINCT 
+bdate 
+FROM bronze.erp_cust_az12
+WHERE BDATE < '1924-01-01' OR bdate>GETDATE()
+
+--Data Standradization & Consistency 
+
+Select Distinct gen,
+From bronze.erp_cust_az12;
+
+============================================================================
+
+
+INSERT INTO silver.erp_cust_az12(cid,bdate,gen)
+Select 
+CASE WHEN cid LIKE 'NAS%' THEN SUBSTRING(cid, 4 , LEN(cid))
+	ELSE cid 
+END cid,
+CASE WHEN bdate > GETDATE() THEN NULL 
+	ELSE bdate
+END AS bdate,
+CASE WHEN UPPER(TRIM(gen)) IN ('F','FEMALE')THEN 'Female' 
+	 WHEN UPPER(TRIM(gen)) IN ('M','MALE')THEN 'Male' 
+	 ELSE 'n/a'
+END AS gen
+
+From bronze.erp_cust_az12
+
+
+Select * From silver.erp_cust_az12;
+
+🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟bronze.erp_loc_a101 🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
+
+
+Select 
+cid,
+cntry
+From bronze.erp_loc_a101 
+
+--Data Standardization & Consistency 
+
+Select Distinct cntry 
+From bronze.erp_loc_a101
+ORDER by cntry
+
+
+============================================================================
+
+INSERT INTO silver.erp_loc_a101(cid,cntry)
+
+Select 
+REPLACE( cid, '-','') cid,
+ CASE WHEN TRIM(cntry) = 'DE' THEN 'Germany'
+	  WHEN TRIM(cntry) = ('US''USA') THEN 'United States'
+	  WHEN TRIM(cntry) = '' OR cntry IS NULL THEN 'n/a'
+	  ELSE TRIM(cntry)
+END AS
+cntry
+From bronze.erp_loc_a101
+
+
+🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟bronze.erp_px_cat_g1v2 🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
+
+
+--check for unwanted spaces
+Select * From bronze.erp_px_cat_g1v2
+WHERE cat != TRIM(cat) OR subcat ! = TRIM(subcat) OR maintenance ! = TRIM(maintenance)
+
+--Data Standardization & Consistency 
+
+SELECT DISTINCT 
+subcat
+FROM bronze.erp_px_cat_g1v2
+
+============================================================================
+
+
+INSERT INTO Silver.erp_px_cat_g1v2
+(id,cat,subcat,maintenance)
+Select 
+id,
+cat,
+subcat,
+maintenance
+From 
+bronze.erp_px_cat_g1v2
