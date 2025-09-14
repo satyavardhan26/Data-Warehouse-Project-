@@ -27,8 +27,9 @@ The pipeline moves data from **CRM/ERP → Bronze → Silver → Gold**, ensurin
 ## 🔗 Data Model & Relationships
 Tables are structured into fact and dimension models with clear relationships between CRM and ERP systems.
 
-![Relationships](Screenshot%202025-08-30%20174142.png)
-
+<p align="center">
+  <img src="docs/Relationship betweenTables.png" alt="Architecture" width="700"/>
+</p>
 ## ⚙️ Tools & Technologies
 - **Database/Warehousing**: SQL-based Data Warehouse  
 - **ETL**: Batch ingestion, data transformations  
