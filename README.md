@@ -30,6 +30,7 @@ Tables are structured into fact and dimension models with clear relationships be
 <p align="center">
   <img src="docs/Relationship between Tables.png" alt="Architecture" width="700"/>
 </p>
+
 ## ⚙️ Tools & Technologies
 
 - [**Datasets**](): Access to the project dataset (csv files).  
