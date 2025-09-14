@@ -41,7 +41,7 @@ Tables are structured into fact and dimension models with clear relationships be
 - [**Notion**](https://www.notion.com/): Get the Project Template from Notion.  
 - [**Notion Project Steps**](https://www.notion.so/1fa89e06dbb68075a22df2ede03bc96b?v=1fa89e06dbb6806fa29b000c942c00f8&source=copy_link): Access to All Project Phases and Tasks.
 
-  # 📊 Data Warehouse Project
+## 📊 Data Warehouse Project
 
 This project implements a **three-layer Data Warehouse** (Bronze, Silver, Gold) integrating CRM and ERP data. Raw data is ingested into Bronze, cleansed and standardized in Silver, and transformed into **business-ready star schema views** in Gold. The warehouse enables **accurate reporting and analytics** with fact and dimension tables for sales, customers, and products. Built using **SQL and ETL transformations**, it demonstrates end-to-end **data engineering and BI practices**.
 
