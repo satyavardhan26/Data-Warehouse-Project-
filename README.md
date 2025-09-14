@@ -11,7 +11,10 @@ This project demonstrates the design and implementation of a **Data Warehouse ar
 - **Gold Layer**: Business-ready views (aggregations, star schema, business logic)  
 - **Consumption**: BI dashboards, SQL analytics, and ML models  
 
-![Architecture]([Data%20Arch.png](https://github.com/satyavardhan26/Data-Warehouse-Project-/blob/main/docs/Data%20Flow%20Diagram.png))
+<p align="center">
+  <img src="docs/Data Arch.png" alt="Architecture" width="700"/>
+</p>
+
 
 ## 🔄 Data Flow
 The pipeline moves data from **CRM/ERP → Bronze → Silver → Gold**, ensuring structured transformations and dimensional modeling.
