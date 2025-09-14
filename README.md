@@ -1,7 +1,8 @@
 # Data Warehouse Project-
 
 ## 📊 Project Overview
-This project demonstrates the design and implementation of a **Data Warehouse architecture** with a multi-layered approach (Bronze, Silver, Gold). The system integrates data from **CRM and ERP sources**, applies transformations, and produces **business-ready datasets** for reporting, analytics, and machine learning.
+
+The project successfully delivered a unified Data Warehouse that integrated CRM and ERP data into a single source of truth. By applying structured transformations in the Silver layer and modeling business-ready fact and dimension tables in the Gold layer, I enabled consistent, high-quality datasets for analytics and reporting. This allowed sales performance to be analyzed across customers, products, and regions with ease, while also creating machine learning–ready datasets for predictive insights. The star schema design improved query performance and made it straightforward to connect BI tools like Power BI and Tableau, ensuring the solution was both scalable and business-friendly.
 
 ## 🏗️ Architecture
 - **Sources**: CRM & ERP systems (CSV files)  
@@ -41,7 +42,4 @@ Tables are structured into fact and dimension models with clear relationships be
 - Star schema and aggregated tables for BI & ML  
 - Scalable architecture with reusable ETL processes  
 
-## 🚀 Future Enhancements
-- Real-time/streaming ingestion  
-- Advanced machine learning integration  
-- Automated orchestration with Airflow/Azure Data Factory  
+
