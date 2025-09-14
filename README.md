@@ -31,9 +31,6 @@ Tables are structured into fact and dimension models with clear relationships be
   <img src="docs/Relationship between Tables.png" alt="Architecture" width="700"/>
 </p>
 ## ⚙️ Tools & Technologies
-## 🛠️ Important Links & Tools  
-
-Everything is for Free!  
 
 - [**Datasets**](): Access to the project dataset (csv files).  
 - [**SQL Server Express**](https://www.microsoft.com/en-us/sql-server/sql-server-downloads): Lightweight server for hosting your SQL database.  
