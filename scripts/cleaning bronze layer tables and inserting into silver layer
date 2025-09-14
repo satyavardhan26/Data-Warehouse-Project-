@@ -1,4 +1,3 @@
-EXEC silver.load_silver
 
 CREATE or ALTER PROCEDURE silver.load_silver AS
 
@@ -8,7 +7,7 @@ BEGIN
 	PRINT'>>Inserting: silver.crm_cust_info';
 
 	INSERT INTO silver.crm_cust_info(
-		cust_id,
+		cst_id,
 		cst_key,
 		cst_firstname,
 		cst_lastname,
