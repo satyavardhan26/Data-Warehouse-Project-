@@ -46,7 +46,7 @@ Tables are structured into fact and dimension models with clear relationships be
 This project implements a **three-layer Data Warehouse** (Bronze, Silver, Gold) integrating CRM and ERP data. Raw data is ingested into Bronze, cleansed and standardized in Silver, and transformed into **business-ready star schema views** in Gold. The warehouse enables **accurate reporting and analytics** with fact and dimension tables for sales, customers, and products. Built using **SQL and ETL transformations**, it demonstrates end-to-end **data engineering and BI practices**.
 
 For full **Data Dictionary** with schema, data types, and transformations:  
-📄 [View Data Dictionary](./data-dictionary.md)
+📄 [View Data Dictionary](DATA_DICTIONARY.md)
 
 
 
