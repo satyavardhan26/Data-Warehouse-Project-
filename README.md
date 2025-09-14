@@ -1,5 +1,4 @@
-# Data-Warehouse-Project-
-# Data Warehouse Project
+# Data Warehouse Project-
 
 ## 📊 Project Overview
 This project demonstrates the design and implementation of a **Data Warehouse architecture** with a multi-layered approach (Bronze, Silver, Gold). The system integrates data from **CRM and ERP sources**, applies transformations, and produces **business-ready datasets** for reporting, analytics, and machine learning.
