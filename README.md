@@ -35,12 +35,12 @@ Tables are structured into fact and dimension models with clear relationships be
 
 Everything is for Free!  
 
-- [**Datasets**](#): Access to the project dataset (csv files).  
-- [**SQL Server Express**](#): Lightweight server for hosting your SQL database.  
-- [**SQL Server Management Studio (SSMS)**](#): GUI for managing and interacting with databases.  
+- [**Datasets**](): Access to the project dataset (csv files).  
+- [**SQL Server Express**](https://www.microsoft.com/en-us/sql-server/sql-server-downloads): Lightweight server for hosting your SQL database.  
+- [**SQL Server Management Studio (SSMS)**](https://learn.microsoft.com/en-us/ssms/): GUI for managing and interacting with databases.  
 - [**Git Repository**](https://github.com/YourUsername/YourRepoName): Set up a GitHub account and repository to manage, version, and collaborate on your code efficiently.  
-- [**DrawIO**](#): Design data architecture, models, flows, and diagrams.  
-- [**Notion**](#): Get the Project Template from Notion.  
+- [**DrawIO**](https://app.diagrams.net/): Design data architecture, models, flows, and diagrams.  
+- [**Notion**](https://www.notion.com/): Get the Project Template from Notion.  
 - [**Notion Project Steps**](https://www.notion.so/1fa89e06dbb68075a22df2ede03bc96b?v=1fa89e06dbb6806fa29b000c942c00f8&source=copy_link): Access to All Project Phases and Tasks.  
 
 
