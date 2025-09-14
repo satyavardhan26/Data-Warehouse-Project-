@@ -41,7 +41,7 @@ Everything is for Free!
 - [**Git Repository**](https://github.com/YourUsername/YourRepoName): Set up a GitHub account and repository to manage, version, and collaborate on your code efficiently.  
 - [**DrawIO**](#): Design data architecture, models, flows, and diagrams.  
 - [**Notion**](#): Get the Project Template from Notion.  
-- [**Notion Project Steps**](#): Access to All Project Phases and Tasks.  
+- [**Notion Project Steps**](https://www.notion.so/1fa89e06dbb68075a22df2ede03bc96b?v=1fa89e06dbb6806fa29b000c942c00f8&source=copy_link): Access to All Project Phases and Tasks.  
 
 
 ## ✅ Outcomes
