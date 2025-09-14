@@ -19,7 +19,10 @@ This project demonstrates the design and implementation of a **Data Warehouse ar
 ## 🔄 Data Flow
 The pipeline moves data from **CRM/ERP → Bronze → Silver → Gold**, ensuring structured transformations and dimensional modeling.
 
-![Data Flow](Data%20Flow%20Diagram.png)
+<p align="center">
+  <img src="docs/Data Flow Diagram.png" alt="Architecture" width="700"/>
+</p>
+
 
 ## 🔗 Data Model & Relationships
 Tables are structured into fact and dimension models with clear relationships between CRM and ERP systems.
